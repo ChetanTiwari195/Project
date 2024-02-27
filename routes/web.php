@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\signupController;
+use App\Http\Controllers\welcomeController;
 use Faker\Guesser\Name;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,16 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [welcomeController::class, 'index']);
 
 // login page route
-Route::get('/login', function(){
-    return view('login');
-});
+Route::get('/login', [LoginController::class, 'login']);
 
-// login page route
-Route::get('/signup', function(){
-    return view('signup');
-});
+// signup page route
+Route::get('/signup', [signupController::class, 'signup']);
