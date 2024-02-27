@@ -1,5 +1,6 @@
 <?php
 
+use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+// login page route
+Route::get('/login', function(){
+    return view('login');
+});
+
+// login page route
+Route::get('/signup', function(){
+    return view('signup');
 });
