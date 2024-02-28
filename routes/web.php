@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\profileController;
 use App\Http\Controllers\signupController;
 use App\Http\Controllers\welcomeController;
 use Faker\Guesser\Name;
@@ -22,6 +23,11 @@ Route::get('/', [welcomeController::class, 'index']);
 
 // login page route
 Route::get('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'authenticate']);
 
 // signup page route
 Route::get('/signup', [signupController::class, 'signup']);
+Route::post('/', [signupController::class, 'create']);
+
+// profile route 
+Route::get('/profile', [profileController::class, 'profile']);
