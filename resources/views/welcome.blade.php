@@ -4,7 +4,8 @@
     <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <!-- User Profile Picture -->
         <div class="w-32 h-32 mb-8 rounded-full overflow-hidden">
-            <img src="{{ asset('path/to/user/profile/picture.jpg') }}" alt="User Profile Picture" class="w-full h-full object-cover">
+            <img src="{{ asset('path/to/user/profile/picture.jpg') }}" alt="User Profile Picture"
+                class="w-full h-full object-cover">
         </div>
 
         <!-- Other Photos and Videos -->
@@ -30,5 +31,4 @@
             <!-- Add more cards as needed -->
         </div>
     </div>
-    
 @endsection

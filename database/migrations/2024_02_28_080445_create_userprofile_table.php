@@ -19,10 +19,12 @@ return new class extends Migration
         Schema::create('userprofile', function (Blueprint $table) {
             $table->id('profile_id');
             $table->string("name");
+            $table->string("email");
             $table->text("photo")->nullable()->default(NULL);
-            $table->longText("bio");
-            $table->date("dob");
-            $table->string('country');
+            $table->longText("bio")->nullable()->default(NULL);
+            $table->date("dob")->nullable()->default(NULL);
+            $table->string('country')->nullable()->default(NULL);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

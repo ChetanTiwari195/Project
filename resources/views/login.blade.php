@@ -3,9 +3,9 @@
 @section('content')
     <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
-            @if (session()->has('success'))
+            @if (session()->has('status'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
-                    {{ session('success') }}
+                    {{ session('status') }}
                 </div>
             @endif
             <div>

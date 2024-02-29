@@ -22,12 +22,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [welcomeController::class, 'index']);
 
 // login page route
-Route::get('/login', [LoginController::class, 'login']);
+Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/login.logout', [LoginController::class, 'logout']);
 
 // signup page route
 Route::get('/signup', [signupController::class, 'signup']);
 Route::post('/', [signupController::class, 'create']);
 
-// profile route 
-Route::get('/profile', [profileController::class, 'profile']);
+// profile route
+Route::get('/profile', [profileController::class, 'profile'])->middleware('auth');
