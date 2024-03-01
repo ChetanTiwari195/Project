@@ -9,7 +9,7 @@ use App\Models\UserProfile;
 
 class profileController extends Controller
 {
-    public function profile()
+    public function save()
     {
         $user = Auth::user();
         if (!$user->profile) {
@@ -19,6 +19,11 @@ class profileController extends Controller
             $profile->user_id = $user->id;
             $profile->save();
         }
+        return redirect('profile.save');
+    }
+
+    public function profile_view(){
+        $user = Auth::User();
         return view('profile', compact('user'));
     }
 }

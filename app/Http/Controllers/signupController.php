@@ -28,6 +28,6 @@ class signupController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
-        return view('profile');
+        return view('login');
     }
 }

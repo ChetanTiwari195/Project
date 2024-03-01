@@ -31,4 +31,5 @@ Route::get('/signup', [signupController::class, 'signup']);
 Route::post('/', [signupController::class, 'create']);
 
 // profile route
-Route::get('/profile', [profileController::class, 'profile'])->middleware('auth');
+Route::get('/profile', [profileController::class, 'save'])->middleware('auth');
+Route::get('/profile.save', [profileController::class, 'profile_view']);
