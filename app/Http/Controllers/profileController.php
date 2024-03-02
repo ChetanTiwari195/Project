@@ -64,10 +64,6 @@ class profileController extends Controller
                 $filename = time() . "_" . $extension;
                 $photo->move('images/users', $filename);
                 $profile->photo = 'images/users/' . $filename;
-                // $filename = time() . '.' . $photo->getClientOriginalExtension();
-                // $location = public_path('images/profiles/' . $filename);
-                // $photo->move($location, $filename);
-                // $profile->photo = $filename;
             }
 
             $profile->save();
@@ -76,9 +72,17 @@ class profileController extends Controller
         return redirect('profile')->with('success', 'Profile updated successfully');
     }
 
-    public function delete($id)
+    public function delete()
     {
-        user::destroy($id);
+        // Set a session message indicating that deletion has been requested
+        session()->flash('delete_requested', 'Are you sure you want to delete your profile? This action cannot be undone.');
+        return redirect('profile');
+    }
+
+    public function handleDelete($id)
+    {
+        User::destroy($id);
         UserProfile::destroy($id);
+        return redirect('/')->with('success', 'Profile deleted successfully');
     }
 }

@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        @if (session()->has('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                {{ session('success') }}
+            </div>
+        @endif
         <!-- User Profile Picture -->
         <div class="w-32 h-32 mb-8 rounded-full overflow-hidden">
             <img src="{{ asset('path/to/user/profile/picture.jpg') }}" alt="User Profile Picture"
