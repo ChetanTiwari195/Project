@@ -7,12 +7,18 @@
                 {{ session('success') }}
             </div>
         @endif
-
-        <!-- User Profile Picture -->
-            <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-blue-500">
-                <img src="{{ asset('images/user-svgrepo-com.svg') }}" alt="Default Profile Photo" />
-        </div>
         
+        <!-- User Profile Picture -->
+        @isset($profile)
+            <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-blue-500">
+            @if ($profile->photo)
+                <img src="{{ asset($profile->photo) }}" alt="Profile Photo" />
+            @else
+                <img src="{{ asset('images/user-svgrepo-com.svg') }}" alt="Default Profile Photo" />
+            @endif
+        </div>
+        @endisset
+
         <!-- Other Photos and Videos -->
         <div class="grid grid-cols-3 gap-4">
             <!-- Example Photo Card -->

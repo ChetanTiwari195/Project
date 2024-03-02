@@ -83,6 +83,6 @@ class profileController extends Controller
     {
         User::destroy($id);
         UserProfile::destroy($id);
-        return redirect('/')->with('success', 'Profile deleted successfully');
+        return redirect('home_profile')->with('success', 'Profile deleted successfully');
     }
 }

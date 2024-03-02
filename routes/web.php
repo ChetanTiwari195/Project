@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [welcomeController::class, 'index']);
+Route::get('/home_profile', [welcomeController::class, 'profileindex']);
 
 // login page route
 Route::get('/login', [LoginController::class, 'login'])->name('login');
