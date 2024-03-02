@@ -9,6 +9,8 @@ use App\Models\UserProfile;
 
 class profileController extends Controller
 {
+
+
     public function profile()
     {
         $user = Auth::user();
@@ -17,11 +19,15 @@ class profileController extends Controller
         return view('profile', compact('profile'));
     }
 
+
+
     public function edit($id)
     {
         $profile = user::find($id);
         return view('profile_form', compact('profile'));
     }
+
+
 
     public function updateProfile(Request $request, $id)
     {
@@ -54,16 +60,25 @@ class profileController extends Controller
             // Handle photo upload if a new photo is provided
             if ($request->hasFile('photo')) {
                 $photo = $request->file('photo');
-                $filename = time() . '.' . $photo->getClientOriginalExtension();
-                $location = public_path('images/profiles/' . $filename);
-                $photo->move($location, $filename);
-                $profile->photo = $filename;
+                $extension = $photo->getClientOriginalExtension();
+                $filename = time() . "_" . $extension;
+                $photo->move('images/users', $filename);
+                $profile->photo = 'images/users/' . $filename;
+                // $filename = time() . '.' . $photo->getClientOriginalExtension();
+                // $location = public_path('images/profiles/' . $filename);
+                // $photo->move($location, $filename);
+                // $profile->photo = $filename;
             }
 
             $profile->save();
         }
 
         return redirect('profile')->with('success', 'Profile updated successfully');
+    }
 
+    public function delete($id)
+    {
+        user::destroy($id);
+        UserProfile::destroy($id);
     }
 }
