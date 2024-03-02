@@ -9,11 +9,13 @@ class UserProfile extends Model
 {
     use HasFactory;
     protected $table = 'userprofile';
-    protected $primarykey = 'profile_id';
-   
+    protected $primarykey = 'id';
+
     // relation with user table
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $fillable = ['user_id', 'name', 'email', 'photo', 'bio', 'dob', 'country'];
 }

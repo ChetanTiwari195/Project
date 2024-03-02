@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use App\Models\User;
+use App\Models\UserProfile;
 
 class signupController extends Controller
 {
@@ -15,12 +18,12 @@ class signupController extends Controller
     public function create(Request $request)
     {
         //validate the request
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required | confirmed',
-            'password_confirmation' => 'required'
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
         ]);
+
         //insert data in the table
         $user = new User;
         $user->name = $request->input('name');
@@ -28,6 +31,15 @@ class signupController extends Controller
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
-        return view('login');
+        // saving the data from user table to userprofile table
+        $userProfile = new UserProfile([
+            'user_id' => $user->id,
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        $userProfile->save();
+
+        return redirect()->intended('login')->with('success', 'Profile creaded successfully');
     }
 }
