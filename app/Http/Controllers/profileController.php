@@ -11,10 +11,10 @@ class profileController extends Controller
 {
 
 
-    public function profile()
-    {
-        $user = Auth::user();
 
+    public function profile($id)
+    {
+        $user = User::find($id);
         $profile = $user->profile;
         return view('profile', compact('profile'));
     }
@@ -72,12 +72,16 @@ class profileController extends Controller
         return redirect('profile')->with('success', 'Profile updated successfully');
     }
 
+
+
     public function delete()
     {
         // Set a session message indicating that deletion has been requested
         session()->flash('delete_requested', 'Are you sure you want to delete your profile? This action cannot be undone.');
         return redirect('profile');
     }
+
+
 
     public function handleDelete($id)
     {

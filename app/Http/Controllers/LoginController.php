@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -20,10 +21,14 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
+
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('profile');
+            // Get the ID of the currently authenticated user
+            $userId = Auth::id();
+            return redirect()->view('profile', ['id' => $userId]);
         } else {
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
