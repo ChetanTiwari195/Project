@@ -9,10 +9,10 @@
         @endif
 
         <!-- User Profile Picture -->
-            <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-blue-500">
-                <img src="{{ asset('images/user-svgrepo-com.svg') }}" alt="Default Profile Photo" />
+        <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-blue-500">
+            <img src="{{ asset('images/user-svgrepo-com.svg') }}" alt="Default Profile Photo" />
         </div>
-        
+
         <!-- Other Photos and Videos -->
         <div class="grid grid-cols-3 gap-4">
             <!-- Example Photo Card -->

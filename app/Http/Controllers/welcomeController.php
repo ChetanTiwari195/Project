@@ -18,8 +18,8 @@ class welcomeController extends Controller
     public function profileindex(){
 
         $user = Auth::user();
-
         $profile = $user->profile;
-        return view('home_profile', compact('profile'));
+        $posts = $user->posts;
+        return view('home_profile', compact('profile'), compact('posts'));
     }
 }

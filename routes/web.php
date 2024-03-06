@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\signupController;
 use App\Http\Controllers\welcomeController;
+use App\Http\Controllers\PostController;
 use Faker\Guesser\Name;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
@@ -37,3 +38,8 @@ Route::get('/profile.edit/{id}', [ProfileController::class, 'edit'])->name('prof
 Route::put('/profile.update/{id}', [ProfileController::class, 'updateProfile']);
 Route::get('/profile.delete', [ProfileController::class, 'delete']);
 Route::delete('/profile/delete/{id}', [ProfileController::class, 'handleDelete'])->name('profile.handleDelete');
+
+// posts routes
+Route::get('/post.create', [PostController::class, 'create'])->name('post.create');
+// Route::get('/post.Show', [PostController::class, 'show'])->name('post.show');
+Route::post('/post/{id}', [PostController::class, 'store'])->name('post.store');

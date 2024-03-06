@@ -11,12 +11,15 @@
     <title>{{ config('app.name') }}</title>
 </head>
 
-<body>
+<body class="bg-cover bg-center min-h-screen bg-blue-300"
+    >
     {{-- adds navigation bar --}}
     @include('layouts.navigation')
 
     {{-- adds content to the page --}}
     @yield('content')
+
+    @include('layouts.post_btn')
 </body>
 
 </html>

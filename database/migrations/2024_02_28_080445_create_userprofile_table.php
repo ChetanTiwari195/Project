@@ -24,7 +24,7 @@ return new class extends Migration
             $table->longText("bio")->nullable()->default(NULL);
             $table->date("dob")->nullable()->default(NULL);
             $table->string('country')->nullable()->default(NULL);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

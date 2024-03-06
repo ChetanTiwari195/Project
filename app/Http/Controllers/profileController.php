@@ -61,7 +61,7 @@ class profileController extends Controller
             if ($request->hasFile('photo')) {
                 $photo = $request->file('photo');
                 $extension = $photo->getClientOriginalExtension();
-                $filename = time() . "_" . $extension;
+                $filename = time() . "." . $extension;
                 $photo->move('images/users', $filename);
                 $profile->photo = 'images/users/' . $filename;
             }
