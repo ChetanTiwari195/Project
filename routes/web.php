@@ -5,6 +5,7 @@ use App\Http\Controllers\profileController;
 use App\Http\Controllers\signupController;
 use App\Http\Controllers\welcomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SearchController;
 use Faker\Guesser\Name;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
@@ -41,5 +42,8 @@ Route::delete('/profile/delete/{id}', [ProfileController::class, 'handleDelete']
 
 // posts routes
 Route::get('/post.create', [PostController::class, 'create'])->name('post.create');
-// Route::get('/post.Show', [PostController::class, 'show'])->name('post.show');
 Route::post('/post/{id}', [PostController::class, 'store'])->name('post.store');
+
+// search route
+Route::get('/search.redirect', [SearchController::class, 'redirect'])->name('redirect');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
