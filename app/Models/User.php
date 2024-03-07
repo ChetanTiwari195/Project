@@ -27,6 +27,27 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function sentFriendRequests()
+    {
+        return $this->hasMany(FriendRequest::class, 'sender_id');
+    }
+
+    public function receivedFriendRequests()
+    {
+        return $this->hasMany(FriendRequest::class, 'receiver_id');
+    }
+
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'friend_requests', 'sender_id', 'receiver_id')
+            ->wherePivot('accepted', true);
+    }
+
+    public function isFriendWith(User $user)
+    {
+        return $this->friends->contains($user);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

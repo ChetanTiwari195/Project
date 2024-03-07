@@ -62,6 +62,12 @@
                         @endif
 
                         <div class="mt-4 flex justify-end">
+                            @if (Auth::check() && Auth::id() != $user->id && !Auth::user()->isFriendWith($user))
+                                <form action="{{ route('friend-request.send', $user->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary">Send Friend Request</button>
+                                </form>
+                            @endif
                             <a href="{{ url('/profile.edit', $profile->user_id) }}"
                                 class="text-blue-500 hover:underline mr-4">Edit</a>
                             <a href="{{ url('/profile.delete') }}" class="text-red-500 hover:underline mr-4">Delete</a>
@@ -70,5 +76,22 @@
 
                 </div>
             </div>
+            @if (Auth::check() && Auth::id() == $user->id)
+                <div class="friend-requests">
+                    @foreach (Auth::user()->receivedFriendRequests as $friendRequest)
+                        <div class="friend-request">
+                            <p>{{ $friendRequest->sender->name }} has sent you a friend request.</p>
+                            <form action="{{ route('friend-request.accept', $friendRequest->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-success">Accept</button>
+                            </form>
+                            <form action="{{ route('friend-request.decline', $friendRequest->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Decline</button>
+                            </form>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     @endsection

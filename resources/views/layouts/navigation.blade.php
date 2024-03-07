@@ -15,7 +15,7 @@
             @if (Auth::check())
                 <div class="hidden md:flex items-center space-x-4">
                     <a href="{{route('redirect')}}" class="text-white hover:text-gray-300">Search</a>
-                    <a href="{{ url('/profile') }}" class="text-white hover:text-gray-300">Profile</a>
+                    <a href="{{ route('profile', Auth::id()) }}" class="text-white hover:text-gray-300">Profile</a>
                     <a href="{{ url('/login.logout') }}" class="text-white hover:text-gray-300">Logout</a>
                 </div>
             @else

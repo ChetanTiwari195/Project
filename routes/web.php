@@ -6,8 +6,7 @@ use App\Http\Controllers\signupController;
 use App\Http\Controllers\welcomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SearchController;
-use Faker\Guesser\Name;
-use Illuminate\Auth\Events\Login;
+use App\Http\Controllers\FriendRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,3 +46,8 @@ Route::post('/post/{id}', [PostController::class, 'store'])->name('post.store');
 // search route
 Route::get('/search.redirect', [SearchController::class, 'redirect'])->name('redirect');
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+// friend request routes
+Route::post('/friend-request/send/{id}', [FriendRequestController::class, 'sendRequest'])->name('friend-request.send');
+Route::post('/friend-request/accept/{id}', [FriendRequestController::class, 'acceptRequest'])->name('friend-request.accept');
+Route::post('/friend-request/decline/{id}', [FriendRequestController::class, 'declineRequest'])->name('friend-request.decline');

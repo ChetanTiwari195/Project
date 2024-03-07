@@ -14,7 +14,7 @@ class profileController extends Controller
     {
         $user = User::find($id);
         $profile = $user->profile;
-        return view('profile', compact('profile'));
+        return view('profile', compact('profile'), compact('user'));
     }
 
 
