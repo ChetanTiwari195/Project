@@ -10,8 +10,8 @@ use App\Models\User;
 class LoginController extends Controller
 {
     public function login()
-    {
-        return view('login');
+    {   
+        return view('login'); 
     }
 
     public function authenticate(Request $request)
@@ -27,8 +27,8 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             // Get the ID of the currently authenticated user
-            $userId = Auth::id();
-            return redirect()->view('profile', ['id' => $userId]);
+            return redirect()->route('profile', ['id' => Auth::id()]);
+
         } else {
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',

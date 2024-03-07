@@ -10,8 +10,6 @@ use App\Models\UserProfile;
 class profileController extends Controller
 {
 
-
-
     public function profile($id)
     {
         $user = User::find($id);

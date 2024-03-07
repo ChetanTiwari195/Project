@@ -34,7 +34,7 @@ Route::get('/signup', [signupController::class, 'signup']);
 Route::post('/signup.create', [signupController::class, 'create']);
 
 // profile route
-Route::get('/profile/{id}', [profileController::class, 'profile'])->middleware('auth');
+Route::get('/profile/{id}', [profileController::class, 'profile'])->name('profile')->middleware('auth');
 Route::get('/profile.edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
 Route::put('/profile.update/{id}', [ProfileController::class, 'updateProfile']);
 Route::get('/profile.delete', [ProfileController::class, 'delete']);
