@@ -43,15 +43,8 @@ class PostController extends Controller
 
         $post->save();
 
-
-        return redirect('profile')->with('success', 'Post created successfully.');
+        $userId = Auth::id(); // Get the ID of the currently authenticated user
+        return redirect()->route('profile', ['id' => $userId])->with('success', 'Post created successfully.');
     }
 
-    // public function show()
-    // {
-    //     $user = Auth::user();
-    //     $post = $user->post;
-
-    //     return 
-    // }
 }

@@ -25,6 +25,5 @@
     </div>
     <div class="grid grid-cols-3 gap-4 mt-8">
         @include('layouts.card', ['posts' => $posts])
-
     </div>
 @endsection

@@ -81,14 +81,20 @@
                     @foreach (Auth::user()->receivedFriendRequests as $friendRequest)
                         <div class="friend-request">
                             <p>{{ $friendRequest->sender->name }} has sent you a friend request.</p>
-                            <form action="{{ route('friend-request.accept', $friendRequest->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-success">Accept</button>
-                            </form>
-                            <form action="{{ route('friend-request.decline', $friendRequest->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-danger">Decline</button>
-                            </form>
+                            @if ($friendRequest->accepted == null)
+                                <form action="{{ route('friend-request.accept', $friendRequest->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">Accept</button>
+                                </form>
+                                <form action="{{ route('friend-request.decline', $friendRequest->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Decline</button>
+                                </form>
+                            @elseif ($friendRequest->accepted == true)
+                                <p>You have accepted this friend request.</p>
+                            @else
+                                <p>You have declined this friend request.</p>
+                            @endif
                         </div>
                     @endforeach
                 </div>
