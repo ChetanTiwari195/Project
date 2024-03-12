@@ -67,7 +67,7 @@ class profileController extends Controller
             $profile->save();
         }
 
-        return redirect('profile')->with('success', 'Profile updated successfully');
+        return redirect()->route('profile', ['id' => Auth::id()])->with('success', 'Profile updated successfully');
     }
 
 

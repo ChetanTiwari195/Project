@@ -20,7 +20,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("email");
-            $table->text("photo")->nullable()->default(NULL);
+            $table->text("photo")->nullable()->default('images/user-svgrepo-com.svg');
             $table->longText("bio")->nullable()->default(NULL);
             $table->date("dob")->nullable()->default(NULL);
             $table->string('country')->nullable()->default(NULL);

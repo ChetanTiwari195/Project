@@ -26,7 +26,9 @@ class welcomeController extends Controller
             ->from('friend_requests')
             ->where('receiver_id', $user->id)
             ->where('accepted', 1);
-    })->get();
+        })->with(['user.profile', 'user.friends.profile'])->get();
+
+
         return view('home_profile', compact('profile', 'posts'));
     }
 }

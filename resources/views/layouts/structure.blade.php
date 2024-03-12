@@ -9,17 +9,37 @@
     {{-- adds tailwind css --}}
     @vite('resources/css/app.css')
     <title>{{ config('app.name') }}</title>
+    <style>
+        .like-button:hover {
+            transform: scale(1.1);
+        }
+
+        .like-button.active path {
+            fill: rgb(201, 17, 17);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1);
+            }
+        }
+
+        .custom-button:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 
-<body class="bg-cover bg-center min-h-screen bg-blue-300"
-    >
+<body class="bg-cover bg-center h-full">
     {{-- adds navigation bar --}}
     @include('layouts.navigation')
 
     {{-- adds content to the page --}}
     @yield('content')
-
-    @include('layouts.post_btn')
 </body>
 
 </html>

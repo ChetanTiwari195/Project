@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mx-auto px-4 py-4">
-        <form action="{{ route('search') }}" method="GET" class="mb-4 flex items-center justify-center">
+        <form action="{{ route('search') }}" method="GET" class=" mb-8 flex items-center justify-center">
             <input type="text" name="search" placeholder="Search by email" class="w-3/4 p-2 border rounded-full"
                 style="max-width: 500px;">
             <button type="submit" class="p-2 bg-blue-500 text-white rounded-full ml-2">Search</button>
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </a>
-                        <hr class="my-2">
+                        <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
                     @else
                         <a href="{{ url('/profile/' . $user->id) }}">
                             <div class="flex items-center">
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                         </a>
-                        <hr class="my-2">
+                        <hr class="my-2 ">
                     @endif
                 @endforeach
             </div>
