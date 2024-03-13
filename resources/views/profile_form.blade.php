@@ -5,7 +5,7 @@
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
             <div class="mb-4">
                 <h2 class="text-gray-700 text-2xl font-bold mb-2">Edit Profile</h2>
-                <form action="{{ url('/profile.update', $profile->user_id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('profile.update', $profile->user_id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-4">

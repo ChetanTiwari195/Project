@@ -1,4 +1,4 @@
-<div class="relative z-10 bg-gray-800 p-4">
+<div class="relative z-20 bg-gray-800 p-4">
     <div class="container mx-auto">
         <div class="flex items-center justify-between">
             <div class="text-white">
@@ -12,8 +12,17 @@
                     </a>
                 @endif
             </div>
-            <div class="md:hidden">
+            <div class="md:hidden flex ">
                 <!-- Hamburger menu button -->
+                @if (isset($user))
+                    <a href="{{ route('alerts', $user->id) }}"
+                        class=" px-3 block text-center text-white hover:text-gray-300"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2m6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1z" />
+                        </svg></a>
+                @endif
+
                 <button id="menuButton" class="text-white hover:text-gray-300 focus:outline-none">
                     <svg class="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -21,12 +30,17 @@
                             d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
+
             </div>
             <div class="hidden md:flex items-center space-x-4">
                 <a href="{{ route('redirect') }}" class="text-white hover:text-gray-300">Search</a>
                 @if (Auth::check())
                     <a href="{{ route('profile', Auth::id()) }}" class="text-white hover:text-gray-300">Profile</a>
                     <a href="{{ url('/login.logout') }}" class="text-white hover:text-gray-300">Logout</a>
+                    @if (isset($user))
+                        <a href="{{ route('alerts', $user->id) }}"
+                            class="block text-center text-white hover:text-gray-300">Notifications</a>
+                    @endif
                 @else
                     <a href="{{ url('/signup') }}" class="text-white hover:text-gray-300">Signup</a>
                     <a href="{{ url('/login') }}" class="text-white hover:text-gray-300">Login</a>
@@ -36,7 +50,8 @@
     </div>
 </div>
 <!-- Menu items for mobile view -->
-<div id="menuItems" class="absolute z-0 bg-gray-800 p-4 hidden md:hidden transition-transform duration-300 ease-in-out transform -translate-y-full w-full">
+<div id="menuItems"
+    class="absolute z-10 bg-gray-800 p-4 hidden md:hidden transition-transform duration-300 ease-in-out transform -translate-y-full w-full">
     <div>
         <a href="{{ route('redirect') }}" class="block text-center text-white hover:text-gray-300">Search</a>
         @if (Auth::check())

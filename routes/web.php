@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\alertsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\signupController;
@@ -35,7 +36,7 @@ Route::post('/signup.create', [signupController::class, 'create']);
 // profile route
 Route::get('/profile/{id}', [profileController::class, 'profile'])->name('profile')->middleware('auth');
 Route::get('/profile.edit/{id}', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
-Route::put('/profile.update/{id}', [ProfileController::class, 'updateProfile']);
+Route::put('/profile.update/{id}', [ProfileController::class, 'updateProfile'])->name('profile.update')->middleware('auth');
 Route::get('/profile.delete', [ProfileController::class, 'delete']);
 Route::delete('/profile/delete/{id}', [ProfileController::class, 'handleDelete'])->name('profile.handleDelete');
 
@@ -51,3 +52,6 @@ Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::post('/friend-request/send/{id}', [FriendRequestController::class, 'sendRequest'])->name('friend-request.send');
 Route::post('/friend-request/accept/{id}', [FriendRequestController::class, 'acceptRequest'])->name('friend-request.accept');
 Route::post('/friend-request/decline/{id}', [FriendRequestController::class, 'declineRequest'])->name('friend-request.decline');
+
+// notifications routes
+Route::get('/alerts/{id}', [alertsController::class, 'index'])->name('alerts');

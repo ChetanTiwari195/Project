@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         </a>
-                        <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+                        <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-300">
                     @else
                         <a href="{{ url('/profile/' . $user->id) }}">
                             <div class="flex items-center">
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                         </a>
-                        <hr class="my-2 ">
+                        <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-300">
                     @endif
                 @endforeach
             </div>

@@ -23,4 +23,15 @@ class Post extends Model
     {
         return $this->belongsTo(FriendRequest::class);
     }
+
+    public function likes()
+    {
+        return $this->hasMany(likes::class);
+    }
+
+    // Relationship to comments
+    public function comments()
+    {
+        return $this->hasMany(comments::class);
+    }
 }

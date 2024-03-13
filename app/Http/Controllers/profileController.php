@@ -21,7 +21,7 @@ class profileController extends Controller
 
     public function edit($id)
     {
-        $profile = user::find($id);
+        $profile = UserProfile::find($id);
         return view('profile_form', compact('profile'));
     }
 

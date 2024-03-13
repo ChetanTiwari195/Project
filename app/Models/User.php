@@ -50,6 +50,17 @@ class User extends Authenticatable
         return $this->friends->contains($user);
     }
 
+    public function likes()
+    {
+        return $this->hasMany(likes::class);
+    }
+
+    // Relationship to comments
+    public function comments()
+    {
+        return $this->hasMany(comments::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
