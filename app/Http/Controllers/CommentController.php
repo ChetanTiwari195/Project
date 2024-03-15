@@ -25,6 +25,8 @@ class CommentController extends Controller
         $comment->content = $request->content;
         $comment->save();
 
+        $comment->user = auth()->user()->name;
+        
         return response()->json($comment);
     }
 }

@@ -153,15 +153,24 @@
                 },
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 // Handle the response, e.g., add the new comment to the list
                 const commentsList = document.getElementById('comments-list');
                 const commentElement = document.createElement('div');
                 commentElement.innerHTML = `
-            <p><strong>${data.user.name}:</strong> ${data.content}</p>
+            <p><strong>${data.user}:</strong> ${data.content}</p>
+            <p><small>now</small></p>
         `;
                 commentsList.appendChild(commentElement);
+
+                // Clear the comment form
+                form.reset();
             })
             .catch(error => {
                 console.error('Error posting comment:', error);
@@ -180,6 +189,7 @@
                     const commentElement = document.createElement('div');
                     commentElement.innerHTML = `
                     <p><strong>${comment.user.name}:</strong> ${comment.content}</p>
+                    <p><small>${comment.created_at}</small></p>
                 `;
                     commentsList.appendChild(commentElement);
                 });
