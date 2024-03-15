@@ -24,7 +24,7 @@
         </div>
     </div>
     <!-- Responsive Grid Layout for Friends' Posts -->
-    <div class="flex flex-col items-center mt-8 pd-4">
+    <div class="main-content flex flex-col items-center mt-8 pd-4">
         @foreach ($posts as $post)
             @include('layouts.card', ['post' => $post, 'friendDetail' => $post->user->profile])
         @endforeach

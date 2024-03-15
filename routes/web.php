@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\alertsController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\profileController;
 use App\Http\Controllers\signupController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\welcomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\FriendRequestController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,3 +57,8 @@ Route::post('/friend-request/decline/{id}', [FriendRequestController::class, 'de
 
 // notifications routes
 Route::get('/alerts/{id}', [alertsController::class, 'index'])->name('alerts');
+
+// like&comment routes
+Route::post('/like/toggle/{post}', [LikeController::class, 'toggle'])->name('like.toggle');
+Route::get('/comment/{post}', [CommentController::class, 'index'])->name('comment.index');
+Route::post('/comment/{post}', [CommentController::class, 'store'])->name('comment.store');
