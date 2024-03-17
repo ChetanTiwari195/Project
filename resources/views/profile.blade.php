@@ -26,15 +26,15 @@
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
                     <div>
-                        <p class="font-bold text-gray-700 text-xl">{{count($user->Friends)}}</p>
+                        <p class="font-bold text-gray-700 text-xl">{{ count($user->Friends) }}</p>
                         <p class="text-gray-400">Friends</p>
                     </div>
                     <div>
-                        <p class="font-bold text-gray-700 text-xl">{{count($user->posts)}}</p>
+                        <p class="font-bold text-gray-700 text-xl">{{ count($user->posts) }}</p>
                         <p class="text-gray-400">Photos</p>
                     </div>
                     <div>
-                        <p class="font-bold text-gray-700 text-xl">{{count($user->likes)}}</p>
+                        <p class="font-bold text-gray-700 text-xl">{{ count($user->likes) }}</p>
                         <p class="text-gray-400">Likes</p>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
     </div>
     <div class="mt-8">
         <a href="{{ route('post.create') }}"
-            class="fixed bottom-10 right-10 shadow-md bg-indigo-400 text-slate-900 antialiased font-bold py-2 px-2 rounded-full hover:bg-indigo-300 transition duration-300">
+            class="fixed bottom-10 right-10 shadow-md bg-indigo-400 text-slate-900 1 font-bold py-2 px-2 rounded-full hover:bg-indigo-300 transition duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="M12.75 11.25V5a.75.75 0 0 0-1.5 0v6.25H5a.75.75 0 0 0 0 1.5h6.25V19a.76.76 0 0 0 .75.75a.75.75 0 0 0 .75-.75v-6.25H19a.75.75 0 0 0 .75-.75a.76.76 0 0 0-.75-.75Z" />

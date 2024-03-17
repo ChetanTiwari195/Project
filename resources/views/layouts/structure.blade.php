@@ -6,11 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ asset('css/output.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Courgette&family=Dangrek&family=Sniglet&display=swap"
+        rel="stylesheet">
     {{-- adds tailwind css --}}
     @vite('resources/css/app.css')
     <title>{{ config('app.name') }}</title>
     <style>
+        body {
+            font-family: 'Courgette';
+        }
+
+        .select {
+            background-color:red;
+        }
+
         .like-button:hover {
             transform: scale(1.1);
         }

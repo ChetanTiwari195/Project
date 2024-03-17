@@ -19,7 +19,7 @@
                             placeholder="Enter Your Name">
                     </div>
                     @error('name')
-                        <div class="text-red-700 px-4 py-3 relative antialiased font-normal">
+                        <div class="text-red-700 px-4 py-3 relative 1 font-normal">
                             <span class="block">{{ $message }}</span>
                         </div>
                     @enderror
@@ -33,7 +33,7 @@
                             placeholder="Email address">
                     </div>
                     @error('email')
-                        <div class="text-red-700 px-4 py-3 relative antialiased font-normal">
+                        <div class="text-red-700 px-4 py-3 relative 1 font-normal">
                             <span class="block">{{ $message }}</span>
                         </div>
                     @enderror
@@ -53,7 +53,7 @@
                             placeholder="Password">
                     </div>
                     @error('password')
-                        <div class="text-red-700 px-4 py-3 relative antialiased font-normal">
+                        <div class="text-red-700 px-4 py-3 relative 1 font-normal">
                             <span class="block">{{ $message }}</span>
                         </div>
                     @enderror
@@ -68,14 +68,15 @@
                             placeholder="Confirm Password">
                     </div>
                     @error('password_confirmation')
-                        <div class="text-red-700 px-4 py-3 relative antialiased font-normal">
+                        <div class="text-red-700 px-4 py-3 relative 1 font-normal">
                             <span class="block">{{ $message }}</span>
                         </div>
                     @enderror
                 </div>
 
                 <div>
-                    <p class="text-sm text-gray-600">Already have an account? <a href="{{ url('/login') }}" class="text-indigo-600 hover:text-indigo-500">Log in</a></p>
+                    <p class="text-sm text-gray-600">Already have an account? <a href="{{ url('/login') }}"
+                            class="text-indigo-600 hover:text-indigo-500">Log in</a></p>
                     <button type="submit"
                         class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
                         in</button>

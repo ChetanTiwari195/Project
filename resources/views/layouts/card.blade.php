@@ -4,7 +4,7 @@
         ->exists();
 @endphp
 
-<div class="main-content wrapper antialiased text-gray-900 lg:w-1/2 md:w-1/2 sm:w-4/5 lg:min-h-80 md:min-h-80">
+<div class="main-content wrapper 1 text-gray-900 lg:w-1/2 md:w-1/2 sm:w-4/5 lg:min-h-80 md:min-h-80">
     <div class="bg-white shadow-md rounded-lg overflow-hidden m-3">
         @if (!is_null($posts) && count($posts) > 0)
             <div>
@@ -15,12 +15,12 @@
                     </div>
                     <div>
                         <div>
-                            <p class="antialiased font-semibold px-2">
+                            <p class="1 font-semibold px-2">
                                 {{ $friendDetail->name }}
                             </p>
                         </div>
                         <div>
-                            <p class="antialiased font-light px-2">
+                            <p class="1 font-light px-2">
                                 {{ $friendDetail->email }}
                             </p>
                         </div>
