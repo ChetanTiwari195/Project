@@ -20,7 +20,11 @@
                             xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2m6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1z" />
-                        </svg></a>
+                        </svg>
+                        <circle cx="20" cy="4" r="2"
+                            fill="{{ $hasNewAlerts ? '#6366F' : 'transparent' }}"
+                            class="{{ $hasNewAlerts ? 'animate-ping' : 'hidden' }}"></circle>
+                    </a>
                 @endif
 
                 <button id="menuButton" class="text-white hover:text-gray-300 focus:outline-none">
@@ -75,7 +79,9 @@
                                 class="transition transform group-hover:-translate-y-2 hover:scale-90">
                                 <path fill="currentColor"
                                     d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2m6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1z" />
-                                    <circle cx="20" cy="4" r="2" fill="{{ $hasNewAlerts ? '#6366F' : 'transparent' }}" class="{{ $hasNewAlerts ? 'animate-ping' : 'hidden' }}"></circle>
+                                <circle cx="20" cy="4" r="2"
+                                    fill="{{ $hasNewAlerts ? '#6366F' : 'transparent' }}"
+                                    class="{{ $hasNewAlerts ? 'animate-ping' : 'hidden' }}"></circle>
                             </svg>
                             <span
                                 class="absolute -bottom-4 opacity-0 group-hover:opacity-100 transform group-hover:-translate-y-1 transition-opacity group-ease-in-out">
