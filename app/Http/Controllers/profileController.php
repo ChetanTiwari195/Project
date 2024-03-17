@@ -13,8 +13,9 @@ class profileController extends Controller
     public function profile($id)
     {
         $user = User::find($id);
+        $posts = $user->posts;
         $profile = $user->profile;
-        return view('profile', compact('profile'), compact('user'));
+        return view('profile', compact('profile', 'posts', 'user'));
     }
 
 

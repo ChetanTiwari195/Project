@@ -1,7 +1,7 @@
 @extends('layouts.structure')
 
 @section('content')
-    <div class="z-0 justify-items-center bg-red-600">
+    <div class="z-0 justify-items-center max-w-full">
         @if (session()->has('success'))
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
                 {{ session('success') }}
@@ -22,20 +22,20 @@
                 </div>
             </div>
         @endif
-        <div class="p-8 bg-white shadow mt-24">
+        <div class="p-8 bg-slate-50 shadow mt-24">
             <div class="grid grid-cols-1 md:grid-cols-3">
                 <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
                     <div>
-                        <p class="font-bold text-gray-700 text-xl">22</p>
+                        <p class="font-bold text-gray-700 text-xl">{{count($user->Friends)}}</p>
                         <p class="text-gray-400">Friends</p>
                     </div>
                     <div>
-                        <p class="font-bold text-gray-700 text-xl">10</p>
+                        <p class="font-bold text-gray-700 text-xl">{{count($user->posts)}}</p>
                         <p class="text-gray-400">Photos</p>
                     </div>
                     <div>
-                        <p class="font-bold text-gray-700 text-xl">89</p>
-                        <p class="text-gray-400">Comments</p>
+                        <p class="font-bold text-gray-700 text-xl">{{count($user->likes)}}</p>
+                        <p class="text-gray-400">Likes</p>
                     </div>
                 </div>
                 <div class="relative">
@@ -83,6 +83,11 @@
                 </div>
             @endif
         </div>
+    </div>
+    <div class="main-content flex flex-col items-center mt-8 pd-4 ">
+        @foreach ($posts as $post)
+            @include('layouts.card', ['post' => $post, 'friendDetail' => $post->user->profile])
+        @endforeach
     </div>
     <div class="mt-8">
         <a href="{{ route('post.create') }}"

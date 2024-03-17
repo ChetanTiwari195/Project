@@ -35,7 +35,7 @@
     </style>
 </head>
 
-<body class="bg-cover bg-center h-full">
+<body class="bg-cover bg-center h-full bg-gradient-to-r from-purple-200 via-blue-300 to-red-200 ">
     {{-- adds navigation bar --}}
     @include('layouts.navigation')
 

@@ -4,7 +4,7 @@
         ->exists();
 @endphp
 
-<div class="main-content wrapper antialiased text-gray-900 min-w-1/2 max-w-6xl lg:min-h-72 md:min-h-80">
+<div class="main-content wrapper antialiased text-gray-900 lg:w-1/2 md:w-1/2 sm:w-4/5 lg:min-h-80 md:min-h-80">
     <div class="bg-white shadow-md rounded-lg overflow-hidden m-3">
         @if (!is_null($posts) && count($posts) > 0)
             <div>
@@ -61,7 +61,7 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <button class="comment-button focus:outline-none" onclick="toggleComment(this)">
+                                        <button class="comment-button focus:outline-none transform hover:scale-110" onclick="toggleComment(this, {{ $post->id }})">
                                             <svg width="30px" height="30px" viewBox="0 -0.5 25 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <!-- Comment Sidebar -->
-                    <div id="comment-sidebar"
+                    <div id="comment-sidebar-{{ $post->id }}"
                         class="bg-white max-h-80 overflow-y-auto z-10 transform translate-x-full transition-transform duration-300 ease-in-out hidden">
                         <div class="px-4">
                             <form id="comment-form" action="{{ route('comment.store', $post->id) }}" method="POST"
@@ -100,7 +100,7 @@
                                             d="m10.6 16.6l7.05-7.05l-1.4-1.4l-5.65 5.65l-2.85-2.85l-1.4 1.4zM12 22q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22" />
                                     </svg></button>
                             </form>
-                            <div id="comments-list" class="comments-list space-y-4 ">
+                            <div id="comments-list-{{ $post->id }}" class="comments-list space-y-4 ">
                                 <!-- Comments will be loaded here -->
                             </div>
                         </div>
@@ -182,33 +182,31 @@
             });
     }
 
-    function loadComments() {
-        const postId = document.querySelector('[data-post-id]').getAttribute('data-post-id');
-        const commentsList = document.getElementById('comments-list');
-
-        fetch(`/comment/${postId}`)
-            .then(response => response.json())
-            .then(comments => {
-                commentsList.innerHTML = ''; // Clear the list
-                comments.forEach(comment => {
-                    const commentElement = document.createElement('div');
-                    commentElement.innerHTML = `
+    function loadComments(postId) {
+    fetch(`/comment/${postId}`)
+        .then(response => response.json())
+        .then(comments => {
+            const commentsList = document.getElementById(`comments-list-${postId}`);
+            commentsList.innerHTML = ''; // Clear the list
+            comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.innerHTML = `
                     <p><strong>${comment.user.name}:</strong> ${comment.content}</p>
                     <p><small>${comment.created_at}</small></p>
                 `;
-                    commentsList.appendChild(commentElement);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching comments:', error);
+                commentsList.appendChild(commentElement);
             });
-    }
+        })
+        .catch(error => {
+            console.error('Error fetching comments:', error);
+        });
+}
 
     // Call this function when the page loads to load comments
     loadComments();
 
-    function toggleComment(button) {
-        const sidebar = document.getElementById('comment-sidebar');
+     function toggleComment(button, postId) {
+        const sidebar = document.getElementById(`comment-sidebar-${postId}`);
         const mainContent = document.getElementById('main-content');
         const paths = button.querySelectorAll('path');
         paths.forEach(path => {
@@ -219,7 +217,7 @@
                 sidebar.classList.remove('hidden');
                 mainContent.classList.remove('flex');
 
-                loadComments();
+                loadComments(postId); // Make sure to pass the postId to the loadComments function
             } else {
                 path.setAttribute('fill', 'none');
                 sidebar.classList.remove('translate-x-0');
@@ -229,4 +227,5 @@
             }
         });
     }
+
 </script>
