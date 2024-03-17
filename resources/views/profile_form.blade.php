@@ -1,65 +1,53 @@
 @extends('layouts.structure')
 
 @section('content')
-    <div class="container mx-auto px-4 py-5">
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-            <div class="mb-4">
-                <h2 class="text-gray-700 text-2xl font-bold mb-2">Edit Profile</h2>
-                <form action="{{ route('profile.update', $profile->user_id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-                            Name
-                        </label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="name" type="text" name="name"
-                            value="{{$profile->name}}" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="bio">
-                            Bio
-                        </label>
-                        <textarea
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="bio" name="bio" value="{{$profile->bio}}" required></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="dob">
-                            Date of Birth
-                        </label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="dob" type="date" name="dob"
-                            value="{{$profile->dob}}" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="country">
-                            Country
-                        </label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="country" type="text" name="country"
-                            value="{{$profile->country}}" required>
-                    </div>
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="photo">
-                            Profile Photo
-                        </label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="photo" type="file" name="photo">
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <button
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit">
-                            Save Profile
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<div class="flex items-center justify-center p-4 md:p-12">
+  <div class="mx-auto w-full max-w-md bg-white shadow-md rounded-lg px-6 py-8">
+    <h2 class="text-gray-700 text-2xl font-bold mb-4">Edit Profile</h2>
+    <form action="{{ route('profile.update', $profile->user_id) }}" method="POST" enctype="multipart/form-data">
+      @csrf
+      @method('PUT')
+
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+        <input type="text" name="name" id="name" value="{{ $profile->name }}"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required>
+      </div>
+
+      <div class="mb-4">
+        <label for="bio" class="block text-gray-700 text-sm font-bold mb-2">Bio</label>
+        <textarea name="bio" id="bio"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required>{{ $profile->bio }}</textarea>
+      </div>
+
+      <div class="mb-4">
+        <label for="dob" class="block text-gray-700 text-sm font-bold mb-2">Date of Birth</label>
+        <input type="date" name="dob" id="dob" value="{{ $profile->dob }}"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required>
+      </div>
+
+      <div class="mb-4">
+        <label for="country" class="block text-gray-700 text-sm font-bold mb-2">Country</label>
+        <input type="text" name="country" id="country" value="{{ $profile->country }}"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required>
+      </div>
+
+      <div class="mb-4">
+        <label for="photo" class="block text-gray-700 text-sm font-bold mb-2">Profile Photo</label>
+        <input type="file" name="photo" id="photo"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      </div>
+
+      <div class="flex items-center justify-center mt-6">
+        <button type="submit"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Save
+          Profile</button>
+      </div>
+    </form>
+  </div>
+</div>
 @endsection

@@ -54,7 +54,7 @@
                         <form action="{{ route('friend-request.send', $user->id) }}" method="POST">
                             @csrf
                             <button type="submit"
-                                class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">Send
+                                class="text-white py-4 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">Send
                                 Friend Request</button>
                         </form>
                     @endif
