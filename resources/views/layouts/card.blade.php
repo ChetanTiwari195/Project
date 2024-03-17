@@ -61,7 +61,8 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <button class="comment-button focus:outline-none transform hover:scale-110" onclick="toggleComment(this, {{ $post->id }})">
+                                        <button class="comment-button focus:outline-none transform hover:scale-110"
+                                            onclick="toggleComment(this, {{ $post->id }})">
                                             <svg width="30px" height="30px" viewBox="0 -0.5 25 25" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -88,8 +89,9 @@
                     <div id="comment-sidebar-{{ $post->id }}"
                         class="bg-white max-h-80 overflow-y-auto z-10 transform translate-x-full transition-transform duration-300 ease-in-out hidden">
                         <div class="px-4">
-                            <form id="comment-form" action="{{ route('comment.store', $post->id) }}" method="POST"
-                                class="mt-4 " onsubmit="event.preventDefault(); postComment();">
+                            <form id="comment-form-{{ $post->id }}"
+                                action="{{ route('comment.store', $post->id) }}" method="POST" class="mt-4 "
+                                onsubmit="event.preventDefault(); postComment({{ $post->id }});">
                                 @csrf
                                 <input type="text" name="content" placeholder="Write a comment..."
                                     class="w-full p-2 border rounded-xl row-auto focus:outline-none focus:border-b-indigo-600 border-b-2 transition transform hover:border-b-indigo-600 ease-in"></input>
@@ -146,8 +148,8 @@
             });
     }
 
-    function postComment() {
-        const form = document.getElementById('comment-form');
+    function postComment(postId) {
+        const form = document.getElementById(`comment-form-${postId}`);
         const formData = new FormData(form);
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
@@ -166,13 +168,18 @@
             })
             .then(data => {
                 // Handle the response, e.g., add the new comment to the list
-                const commentsList = document.getElementById('comments-list');
+                const commentsList = document.getElementById(`comments-list-${postId}`);
                 const commentElement = document.createElement('div');
                 commentElement.innerHTML = `
-            <p><strong>${data.user}:</strong> ${data.content}</p>
-            <p><small>now</small></p>
-        `;
-                commentsList.appendChild(commentElement);
+        <p><strong>${data.user}:</strong> ${data.content}</p>
+        <p><small>now</small></p>
+    `;
+                // Insert the new comment at the top of the list
+                if (commentsList.firstChild) {
+                    commentsList.insertBefore(commentElement, commentsList.firstChild);
+                } else {
+                    commentsList.appendChild(commentElement);
+                }
 
                 // Clear the comment form
                 form.reset();
@@ -183,29 +190,36 @@
     }
 
     function loadComments(postId) {
-    fetch(`/comment/${postId}`)
-        .then(response => response.json())
-        .then(comments => {
-            const commentsList = document.getElementById(`comments-list-${postId}`);
-            commentsList.innerHTML = ''; // Clear the list
-            comments.forEach(comment => {
-                const commentElement = document.createElement('div');
-                commentElement.innerHTML = `
-                    <p><strong>${comment.user.name}:</strong> ${comment.content}</p>
-                    <p><small>${comment.created_at}</small></p>
-                `;
-                commentsList.appendChild(commentElement);
+        fetch(`/comment/${postId}`)
+            .then(response => response.json())
+            .then(comments => {
+                const commentsList = document.getElementById(`comments-list-${postId}`);
+                commentsList.innerHTML = ''; // Clear the list
+                comments.forEach(comment => {
+                    // Create a new Date object from the comment's created_at timestamp
+                    const date = new Date(comment.created_at);
+                    // Format the date and time
+                    const formattedDate =
+                        `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+
+                    const commentElement = document.createElement('div');
+                    commentElement.innerHTML = `
+                <p><strong>${comment.user.name}:</strong> ${comment.content}</p>
+                <p><small>${formattedDate}</small></p>
+            `;
+                    commentsList.appendChild(commentElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching comments:', error);
             });
-        })
-        .catch(error => {
-            console.error('Error fetching comments:', error);
-        });
-}
+    }
 
     // Call this function when the page loads to load comments
-    loadComments();
+    // Call this function when the page loads to load comments
+    loadComments({{ $post->id }});
 
-     function toggleComment(button, postId) {
+    function toggleComment(button, postId) {
         const sidebar = document.getElementById(`comment-sidebar-${postId}`);
         const mainContent = document.getElementById('main-content');
         const paths = button.querySelectorAll('path');
@@ -227,5 +241,4 @@
             }
         });
     }
-
 </script>

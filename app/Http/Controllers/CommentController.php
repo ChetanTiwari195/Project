@@ -11,7 +11,8 @@ class CommentController extends Controller
     public function index(Post $post)
     {
         $comments = comments::where('post_id', $post->id)
-            ->with('user') 
+            ->with('user')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return response()->json($comments);
@@ -26,7 +27,7 @@ class CommentController extends Controller
         $comment->save();
 
         $comment->user = auth()->user()->name;
-        
+
         return response()->json($comment);
     }
 }
