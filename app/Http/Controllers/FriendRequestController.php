@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\FriendRequest;
 use App\Models\User;
-use App\Notifications\FriendRequestSent;
 use Illuminate\Http\Request;
 
 class FriendRequestController extends Controller
@@ -27,10 +26,8 @@ class FriendRequestController extends Controller
         ]);
 
         // Send a notification to the receiver
-        // Assuming you have a FriendRequestSent notification
+        
         $receiver = User::find($id);
-        $receiver->notify(new FriendRequestSent(auth()->user()));
-
         return back()->with('success', 'Friend request sent.');
     }
 
